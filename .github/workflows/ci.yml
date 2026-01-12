@@ -43,7 +43,7 @@ jobs:
         run: |
           cabal configure --enable-tests --enable-benchmarks --test-show-details=direct
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         name: Cache ~/.cabal/store and build files
         with:
           path: |
@@ -86,7 +86,7 @@ jobs:
           enable-stack: true
           stack-version: latest
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         name: Cache ~/.stack
         with:
           path: |
