@@ -20,7 +20,6 @@ module FileIO (
 import Prelude hiding (read)
 import qualified Prelude as P
 
-import Control.Applicative ((<$>))
 import Control.Exception (SomeException(..), throw, try)
 import Control.Monad (void)
 
@@ -42,6 +41,7 @@ import System.Posix (Fd,
                      fileSynchronise,
                      closeFd,
                      OpenMode(ReadWrite),
+                     OpenFileFlags(..),
                      exclusive, trunc,
                      defaultFileFlags,
                      stdFileMode)
@@ -61,7 +61,7 @@ newtype FHandle = FHandle Fd
 -- | Open the specified file in read-write mode.
 openReadWrite :: FilePath -> IO FHandle
 openReadWrite filename =
-    FHandle <$> openFd filename ReadWrite (Just stdFileMode) defaultFileFlags
+    FHandle <$> openFd filename ReadWrite (defaultFileFlags { creat = Just stdFileMode })
 
 -- | Write **at most** the specified amount of bytes to a handle.
 write :: FHandle -> Ptr Word8 -> Word64 -> IO Word64
@@ -174,7 +174,7 @@ checkBreakError e | SE.isDoesNotExistError e = return ()
 takeLock :: FilePath -> IO PrefixLock
 takeLock fp = do
   createDirectoryIfMissing True (takeDirectory fp)
-  h <- openFd fp ReadWrite (Just 0o600) (defaultFileFlags {exclusive = True, trunc = True}) >>= fdToHandle
+  h <- openFd fp ReadWrite (defaultFileFlags {creat = Just stdFileMode, exclusive = True, trunc = True}) >>= fdToHandle
   pid <- getProcessID
   hPrint h pid >> hClose h
   -- Read back our own lock and make sure its still ours

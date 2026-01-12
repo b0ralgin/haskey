@@ -12,7 +12,6 @@ module Database.Haskey.Store.Page where
 
 import Codec.Compression.LZ4
 
-import Control.Applicative ((<$>))
 import Control.Monad.Catch
 
 import Data.Binary (Binary(..), Put, Get)

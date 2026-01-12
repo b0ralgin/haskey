@@ -1,4 +1,4 @@
-resolver: lts-9.0
+resolver: lts-22.44
 packages:
 - '.'
 extra-deps:
@@ -10,3 +10,4 @@ extra-deps:
 - xxhash-ffi-0.2.0.0
 flags: {}
 extra-package-dbs: []
+allow-newer: true

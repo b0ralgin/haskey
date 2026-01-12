@@ -29,7 +29,7 @@ module Database.Haskey.Store.InMemory (
 , WrongOverflowValueError(..)
 ) where
 
-import Control.Applicative (Applicative, (<$>))
+import Control.Applicative (Applicative)
 import Control.Concurrent.MVar
 import Control.Monad
 import Control.Monad.Catch

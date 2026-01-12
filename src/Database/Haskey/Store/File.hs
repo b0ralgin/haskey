@@ -29,7 +29,7 @@ module Database.Haskey.Store.File (
 , WrongOverflowValueError(..)
 ) where
 
-import Control.Applicative (Applicative, (<$>))
+import Control.Applicative (Applicative)
 import Control.Monad
 import Control.Monad.Catch
 import Control.Monad.IO.Class
@@ -39,7 +39,6 @@ import Control.Monad.Trans.State.Strict ( StateT, evalStateT)
 
 import Data.Map (Map)
 import Data.Maybe (fromJust)
-import Data.Monoid ((<>))
 import Data.Typeable (Typeable, cast)
 import Data.Word (Word64)
 import qualified Data.ByteString.Lazy as BL
@@ -49,7 +48,7 @@ import qualified FileIO as IO
 
 import System.Directory (createDirectoryIfMissing, removeFile, getDirectoryContents)
 import System.FilePath (takeDirectory)
-import System.IO.Error (ioError, isDoesNotExistError)
+import System.IO.Error (isDoesNotExistError)
 
 import Data.BTree.Impure.Internal.Structures
 import Data.BTree.Primitives

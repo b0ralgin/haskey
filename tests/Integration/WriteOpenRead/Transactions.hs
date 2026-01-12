@@ -4,6 +4,7 @@ module Integration.WriteOpenRead.Transactions where
 import Test.QuickCheck
 
 import Control.Applicative ((<$>), (<*>), pure)
+import Control.Monad (replicateM)
 import Control.Monad.State
 
 import Data.Foldable (foldlM)
